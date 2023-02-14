@@ -8,11 +8,35 @@ public class Rook extends Figure{
         super(figureColor, selected,row,column);
     }
 
-    public boolean move(int row, int column, List<Figure> figureList)  {
-        if(!isSelected()){
-            throw new Exception("The figure must be selected");
-        }else if{
+    @Override
+    protected boolean canMove(int row, int column, List<Figure> figureList) {
+       Figure table[][] = TableGenerator.generateTable(figureList);
 
+       if(table[getRow()][getColumn()].getColor() == table[row][column].getColor()){
+           return false;
+       }else if(getRow() != row && getColumn() != column){
+           return false;
+       }
+       return true;
+
+    }
+
+    public boolean move(int row, int column, List<Figure> figureList)  {
+        Figure table[][] = TableGenerator.generateTable(figureList);
+        if(!isSelected()){
+            return false;
+        }else{
+            if(canMove(row,column,figureList) == false){
+                return false;
+            }else{
+                setRow(row);
+                setColumn(column);
+            }
         }
+
+
+
+
+        return false;
     }
 }
