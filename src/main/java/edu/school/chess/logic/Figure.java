@@ -46,5 +46,7 @@ public abstract class Figure {
             return "f";
         }
     }
+
+    protected abstract boolean canMove(int row, int column, List<Figure> figureList);
     public abstract boolean move(int row, int column, List<Figure> figureList);
 }
