@@ -9,6 +9,11 @@ public class TableGenerator {
         }
         final Figure[][] table = new Figure[8][8];
         figures.forEach(f->table[f.getRow()][f.getColumn()] = f);
+        /*
+        for(int i = 0; i<figures.size(); i++){
+            table[figures.get(i).getRow()][figures.get(i).getColumn()] = figures.get(i);
+       }
+         */
         return table;
     }
 }
