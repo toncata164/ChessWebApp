@@ -3,7 +3,7 @@ package edu.school.chess.logic;
 import java.util.List;
 
 public abstract class Figure {
-    public boolean figureColor;
+    public boolean figureColor;//true - black,  false - white
     public boolean selected;
     public int row;
     public int column;
@@ -32,6 +32,13 @@ public abstract class Figure {
     public int getColumn(){
         return column;
     }
+    public boolean isBlack(){
+        return figureColor;
+    }
+    public boolean isWhite(){
+        return !isBlack();
+    }
+
     public Figure(boolean color, boolean selected, int row, int column){
         setColor(color);
         setSelected(selected);
