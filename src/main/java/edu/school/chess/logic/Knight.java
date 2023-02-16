@@ -24,8 +24,7 @@ public class Knight extends Figure{
         }
     }
     @Override
-
-
+    gbb./
     public boolean move(int row, int column, List<Figure> figureList) {
 
         if(isSelected() == false)
@@ -33,8 +32,6 @@ public class Knight extends Figure{
             throw new RuntimeException("You need to select the figure first!");
         }
         else if(true)
-
-
 
         {
             throw new RuntimeException("The knight can't move there!");

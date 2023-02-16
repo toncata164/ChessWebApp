@@ -8,6 +8,17 @@ public class Bishop extends Figure{
     }
 
     @Override
+    protected boolean canMove(int row, int column, List<Figure> figureList) {
+        if(
+                (getRow()+1 && getColumn()+1)
+        )
+        {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean move(int row, int column, List<Figure> figureList) {
 
         return false;
