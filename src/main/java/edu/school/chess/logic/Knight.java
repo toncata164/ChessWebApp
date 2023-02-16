@@ -7,14 +7,23 @@ public class Knight extends Figure{
         super(color, selected, row, column);
     }
 
-    @Override
     protected boolean canMove(int row, int column, List<Figure> figureList) {
-        Figure table[][]= TableGenerator.generateTable(figureList);
-                if(table[getRow()][getColumn()].getColor()==table[row][column].getColor()){
-                    return false;
-                }
+        if ((row != getRow() + 2 && column != this.getColumn() + 1) &&
+                (row != getRow() + 1 && column != this.getColumn() + 2) &&
+                (row != getRow() - 1 && column != this.getColumn() + 2) &&
+                (row != getRow() - 2 && column != this.getColumn() + 1) &&
+                (row != getRow() - 2 && column != this.getColumn() - 1) &&
+                (row != getRow() - 1 && column != this.getColumn() - 2) &&
+                (row != getRow() + 1 && column != this.getColumn() - 2) &&
+                (row != getRow() + 2 && column != this.getColumn() - 1))
+        {
                 return true;
     }
+        {
+            return false;
+        }
+    }
+    @Override
 
 
     public boolean move(int row, int column, List<Figure> figureList) {

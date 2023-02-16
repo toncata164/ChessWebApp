@@ -2,7 +2,7 @@ package edu.school.chess.logic;
 
 import java.util.List;
 
-public class King extends Figure{
+public class  King extends Figure{
     @Override
     protected boolean canMove(int row, int column, List<Figure> figureList) {
         if(
