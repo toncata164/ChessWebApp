@@ -7,4 +7,10 @@ public class Pawn extends Figure{
     public boolean move(int row, int column, List<Figure> figureList) {
         return false;
     }
+
+    @Override
+    protected boolean canMove(int row, int column, List<Figure> figureList) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

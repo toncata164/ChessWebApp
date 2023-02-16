@@ -12,4 +12,10 @@ public class Bishop extends Figure{
 
         return false;
     }
+
+    @Override
+    protected boolean canMove(int row, int column, List<Figure> figureList) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }
