@@ -3,12 +3,16 @@ package edu.school.chess.logic;
 import java.util.List;
 
 public class Queen extends Figure{
+    public Queen(boolean color, boolean selected, int row, int column) {
+        super(color, selected, row, column);
+    }
+
     @Override
     protected boolean canMove(int row, int column, List<Figure> figureList) {
         int curRow=this.getRow();
         int curCol=this.getColumn();
         for(int i=curRow; i<8; i++){
-            if(curRow==i && curCol==column){
+            if(row==i && curCol==column){
                 return true;
             }
         }
@@ -18,62 +22,43 @@ public class Queen extends Figure{
             }
         }
         for(int i=curCol; i<8; i++){
-            if(curCol==i && curRow==row){
+            if(column==i && curRow==row){
                 return true;
             }
         }
         for(int i=curCol; i>=0; i--){
-            if(curCol==i && curRow==row){
+            if(column==i && curRow==row){
                 return true;
             }
         }
-        int x=curRow+1;
-        int y=curRow+1;
-        while(true){
-            if(x+1==8 || y+1==8){
-                break;
-            }
-            if(x==row && y==column){
+        int k=curCol;
+        for(int i=curRow; i>=0; i--){
+
+            if(row==i && column==k){
                 return true;
             }
-            x++;
-            y++;
+            k--;
         }
-        x=curRow+1;
-        y=curCol-1;
-        while(true){
-            if(x+1==8 || y==0){
-                break;
-            }
-            if(x==row && y==column){
+        k=curCol;
+        for(int i=curRow; i<8; i++){
+            if(row==i && column==k){
                 return true;
             }
-            x++;
-            y--;
+            k++;
         }
-        x=curRow-1;
-        y=curCol+1;
-        while(true){
-            if(x==0 || y+1==8){
-                break;
-            }
-            if(x==row && y==column){
+        k=curCol;
+        for(int i=curRow; i>=0; i--){
+            if(row==i && column==k){
                 return true;
             }
-            x--;
-            y++;
+            k++;
         }
-        x=curRow-1;
-        y=curCol-1;
-        while(true){
-            if(x==0 || y==0){
-                break;
-            }
-            if(x==row && y==column){
+        k=curCol;
+        for(int i=curRow; i<8; i++){
+            if(row==i && column==k){
                 return true;
             }
-            x--;
-            y--;
+            k--;
         }
         return false;
     }

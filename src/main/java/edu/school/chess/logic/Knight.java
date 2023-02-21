@@ -8,14 +8,14 @@ public class Knight extends Figure{
     }
 
     protected boolean canMove(int row, int column, List<Figure> figureList) {
-        if ((row != getRow() + 2 && column != this.getColumn() + 1) &&
-                (row != getRow() + 1 && column != this.getColumn() + 2) &&
-                (row != getRow() - 1 && column != this.getColumn() + 2) &&
-                (row != getRow() - 2 && column != this.getColumn() + 1) &&
-                (row != getRow() - 2 && column != this.getColumn() - 1) &&
-                (row != getRow() - 1 && column != this.getColumn() - 2) &&
-                (row != getRow() + 1 && column != this.getColumn() - 2) &&
-                (row != getRow() + 2 && column != this.getColumn() - 1))
+        if ((row == getRow() + 2&& column == this.getColumn() + 1) ||
+                (row == getRow() + 1 && column == this.getColumn() + 2) ||
+                (row == getRow() - 1 && column == this.getColumn() + 2) ||
+                (row == getRow() - 2 && column == this.getColumn() + 1) ||
+                (row == getRow() - 2 && column == this.getColumn() - 1) ||
+                (row == getRow() - 1 && column == this.getColumn() - 2) ||
+                (row == getRow() + 1 && column == this.getColumn() - 2) ||
+                (row == getRow() + 2 && column == this.getColumn() - 1))
         {
                 return true;
     }
@@ -24,17 +24,32 @@ public class Knight extends Figure{
         }
     }
     @Override
-    gbb./
+
     public boolean move(int row, int column, List<Figure> figureList) {
 
         if(isSelected() == false)
         {
-            throw new RuntimeException("You need to select the figure first!");
+            return false;
         }
-        else if(true)
-
-        {
-            throw new RuntimeException("The knight can't move there!");
+        else{
+            if(canMove(row,column,figureList)==true){
+                for(int i=0; i<figureList.size(); i++){
+                    if(figureList.get(i)!=this && figureList.get(i).getRow()==row && figureList.get(i).getColumn()==column){
+                        if(figureList.get(i).getColor()==this.getColor()){
+                            return false;
+                        }
+                        else{
+                            setRow(row);
+                            setColumn(column);
+                            figureList.remove(i);
+                            return true;
+                        }
+                    }
+                }
+                setRow(row);
+                setColumn(column);
+                return true;
+            }
         }
 
         return false;
