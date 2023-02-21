@@ -1,9 +1,6 @@
 package edu.school.chess.logic;
 
-import java.awt.Color;
 import java.util.List;
-
-import javax.swing.text.AttributeSet.ColorAttribute;
 
 public class Queen extends Figure
 {
@@ -14,12 +11,12 @@ public class Queen extends Figure
 
     public boolean move(int row, int column, List<Figure> figureList) 
     {
-        Figure[][] figures = TableGenerator.generateTable(figureList);
-
-        if(canMove(row, column, figureList) || checkDiagonalPath(figures, row, column) || checkStraightPath(figures, row, column))
+        if(canMove(row, column, figureList))
         {
             setRow(row);
             setColumn(column);
+
+            return true;
         }
            
         return false;
@@ -27,18 +24,32 @@ public class Queen extends Figure
     
     protected boolean canMove(int nextRow, int nextColumn, List<Figure> figureList) 
     {
-        if (getRow() == nextColumn || getColumn() == nextColumn) {
+        Figure[][] figures = TableGenerator.generateTable(figureList);
+
+        if (getRow() == nextColumn || getColumn() == nextColumn) 
+        {
             return true;
         }
     
-        if (Math.abs(getRow() - nextRow) == Math.abs(getColumn() - nextColumn)) {
+        if (Math.abs(getRow() - nextRow) == Math.abs(getColumn() - nextColumn)) 
+        {
             return true;
         }
     
+        if(checkDiagonalPath(figures, nextRow, nextColumn))
+        {
+            return true;
+        }
+
+        if(checkStraightPath(figures, nextRow, nextColumn))
+        {
+            return true;
+        }
+
         return false;
     }
 
-    public static boolean checkDiagonalPath(Figure[][] board, int targetRow, int targetCol) {
+    private boolean checkDiagonalPath(Figure[][] board, int targetRow, int targetCol) {
         int dirRow = Integer.compare(targetRow, getRow());
         int dirCol = Integer.compare(targetCol, getColumn());
     
@@ -48,21 +59,41 @@ public class Queen extends Figure
                 return false; 
             } 
         }
+
+        if(board[targetRow][targetCol].isWhite() && board[targetRow][targetCol].getColor()) //myColor is White
+        {
+            return false;
+        }
+
+        if(board[targetRow][targetCol].isBlack() && board[targetRow][targetCol].getColor()) //myColor is White
+        {
+            return false;
+        }
     
         return true; 
     }
 
-    public static boolean checkStraightPath(Figure[][] board, int targetRow, int targetCol) {
+    private boolean checkStraightPath(Figure[][] board, int targetRow, int targetCol) {
         int dirRow = Integer.compare(targetRow, getRow());
         int dirCol = Integer.compare(targetCol, getColumn());
     
         for (int row = getRow() + dirRow, col = getColumn() + dirCol; row != targetRow || 
             col != targetCol; row += dirRow, col += dirCol) {
-            if (board[row][col] != null && board[row][col].getColor() == Color.BLACK) {
+            if (board[row][col] != null) {
                 return false; 
-            }
+            }   
         }
-    
+
+        if(board[targetRow][targetCol].isWhite() && board[targetRow][targetCol].getColor()) //myColor is White
+        {
+            return false;
+        }
+
+        if(board[targetRow][targetCol].isBlack() && board[targetRow][targetCol].getColor()) //myColor is White
+        {
+            return false;
+        }
+
         return true; 
     }
 }
