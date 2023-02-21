@@ -12,31 +12,26 @@ public class Rook extends Figure{
     protected boolean canMove(int row, int column, List<Figure> figureList) {
        Figure table[][] = TableGenerator.generateTable(figureList);
 
-       if(table[getRow()][getColumn()].getColor() == table[row][column].getColor()){
+       if(table[getRow()][getColumn()].getColor() != table[row][column].getColor()){
            return false;
        }else if(getRow() != row && getColumn() != column){
            return false;
        }
        return true;
-
     }
 
     public boolean move(int row, int column, List<Figure> figureList)  {
         Figure table[][] = TableGenerator.generateTable(figureList);
         if(!isSelected()){
             return false;
-        }else{
-            if(canMove(row,column,figureList) == false){
+        }else {
+            if (canMove(row, column, figureList) == false) {
                 return false;
-            }else{
+            } else {
                 setRow(row);
                 setColumn(column);
+                return true;
             }
         }
-
-
-
-
-        return false;
     }
 }
