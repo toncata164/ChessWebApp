@@ -2,103 +2,98 @@ package edu.school.chess.logic;
 
 import java.util.List;
 
-public class Queen extends Figure{
-    @Override
-    protected boolean canMove(int row, int column, List<Figure> figureList) {
-        int curRow=this.getRow();
-        int curCol=this.getColumn();
-        for(int i=curRow; i<8; i++){
-            if(curRow==i && curCol==column){
-                return true;
-            }
+public class Queen extends Figure
+{
+    public Queen(boolean color, boolean selected, int row, int column) 
+    {
+        super(color, selected, row, column);
+    }
+
+    public boolean move(int row, int column, List<Figure> figureList) 
+    {
+        if(canMove(row, column, figureList))
+        {
+            setRow(row);
+            setColumn(column);
+
+            return true;
         }
-        for(int i=curRow; i>=0; i--){
-            if(curRow==i && curCol==column){
-                return true;
-            }
+           
+        return false;
+    }
+    
+    protected boolean canMove(int nextRow, int nextColumn, List<Figure> figureList) 
+    {
+        Figure[][] figures = TableGenerator.generateTable(figureList);
+
+        if (getRow() == nextColumn || getColumn() == nextColumn) 
+        {
+            return true;
         }
-        for(int i=curCol; i<8; i++){
-            if(curCol==i && curRow==row){
-                return true;
-            }
+    
+        if (Math.abs(getRow() - nextRow) == Math.abs(getColumn() - nextColumn)) 
+        {
+            return true;
         }
-        for(int i=curCol; i>=0; i--){
-            if(curCol==i && curRow==row){
-                return true;
-            }
+    
+        if(checkDiagonalPath(figures, nextRow, nextColumn))
+        {
+            return true;
         }
-        int x=curRow+1;
-        int y=curRow+1;
-        while(true){
-            if(x+1==8 || y+1==8){
-                break;
-            }
-            if(x==row && y==column){
-                return true;
-            }
-            x++;
-            y++;
+
+        if(checkStraightPath(figures, nextRow, nextColumn))
+        {
+            return true;
         }
-        x=curRow+1;
-        y=curCol-1;
-        while(true){
-            if(x+1==8 || y==0){
-                break;
-            }
-            if(x==row && y==column){
-                return true;
-            }
-            x++;
-            y--;
-        }
-        x=curRow-1;
-        y=curCol+1;
-        while(true){
-            if(x==0 || y+1==8){
-                break;
-            }
-            if(x==row && y==column){
-                return true;
-            }
-            x--;
-            y++;
-        }
-        x=curRow-1;
-        y=curCol-1;
-        while(true){
-            if(x==0 || y==0){
-                break;
-            }
-            if(x==row && y==column){
-                return true;
-            }
-            x--;
-            y--;
-        }
+
         return false;
     }
 
-    @Override
-    public boolean move(int row, int column, List<Figure> figureList) {
-        if(canMove(row,column,figureList)==true){
-            for(int i=0; i<figureList.size(); i++){
-                if(figureList.get(i)!=this) {
-                    if (figureList.get(i).getRow() == row && figureList.get(i).getColumn() == column) {
-                        if (figureList.get(i).getColor() == this.getColor()) {
-                            return false;
-                        } else {
-                            figureList.remove(i);
-                            setRow(row);
-                            setColumn(column);
-                            return true;
-                        }
-                    }
-                }
-            }
-            setRow(row);
-            setColumn(column);
-            return true;
+    private boolean checkDiagonalPath(Figure[][] board, int targetRow, int targetCol) {
+        int dirRow = Integer.compare(targetRow, getRow());
+        int dirCol = Integer.compare(targetCol, getColumn());
+    
+        for (int row = getColumn() + dirRow, col = getColumn() + dirCol; 
+            row != targetRow; row += dirRow, col += dirCol) {
+            if (board[row][col] != null) {
+                return false; 
+            } 
         }
-        return false;
+
+        if(board[targetRow][targetCol].isWhite() && board[targetRow][targetCol].getColor()) //myColor is White
+        {
+            return false;
+        }
+
+        if(board[targetRow][targetCol].isBlack() && board[targetRow][targetCol].getColor()) //myColor is White
+        {
+            return false;
+        }
+    
+        return true; 
+    }
+
+    private boolean checkStraightPath(Figure[][] board, int targetRow, int targetCol) {
+        int dirRow = Integer.compare(targetRow, getRow());
+        int dirCol = Integer.compare(targetCol, getColumn());
+    
+        for (int row = getRow() + dirRow, col = getColumn() + dirCol; row != targetRow || 
+            col != targetCol; row += dirRow, col += dirCol) {
+            if (board[row][col] != null) {
+                return false; 
+            }   
+        }
+
+        if(board[targetRow][targetCol].isWhite() && board[targetRow][targetCol].getColor()) //myColor is White
+        {
+            return false;
+        }
+
+        if(board[targetRow][targetCol].isBlack() && board[targetRow][targetCol].getColor()) //myColor is White
+        {
+            return false;
+        }
+
+        return true; 
     }
 }

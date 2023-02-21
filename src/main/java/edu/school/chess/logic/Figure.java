@@ -5,8 +5,8 @@ import java.util.List;
 public abstract class Figure {
     public boolean figureColor;//true - black,  false - white
     public boolean selected;
-    public int row;
-    public int column;
+    public static int row;
+    public static int column;
 
     public void setColor(boolean newColor){
         this.figureColor=newColor;
@@ -26,10 +26,10 @@ public abstract class Figure {
     public boolean isSelected(){
         return selected;
     }
-    public int getRow(){
+    public static int getRow(){
         return row;
     }
-    public int getColumn(){
+    public static int getColumn(){
         return column;
     }
     public boolean isBlack(){
