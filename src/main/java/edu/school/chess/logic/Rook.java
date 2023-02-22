@@ -37,4 +37,10 @@ public class Rook extends Figure{
             }
         }
     }
+    public String getFigure(){
+        if(isSelected()){
+            return "R";
+        }
+        return "r";
+    }
 }

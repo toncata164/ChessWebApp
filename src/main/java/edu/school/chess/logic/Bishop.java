@@ -22,5 +22,10 @@ public class Bishop extends Figure{
         return false;
     }
 
-
+    public String getFigure(){
+        if(isSelected()){
+            return "B";
+        }
+        return "b";
+    }
 }

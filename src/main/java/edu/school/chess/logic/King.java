@@ -3,7 +3,9 @@ package edu.school.chess.logic;
 import java.util.List;
 
 public class  King extends Figure{
-
+    public King(int row, int column, boolean figureColor){
+        this(figureColor, false, row, column);
+    }
     public King(boolean color, boolean selected, int row, int column) {
         super(color, selected, row, column);
     }
@@ -57,5 +59,12 @@ public class  King extends Figure{
         return true;
         }
         return false;
+    }
+
+    public String getFigure(){
+        if(isSelected()){
+            return "C";
+        }
+        return "c";
     }
 }

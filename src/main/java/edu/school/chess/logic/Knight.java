@@ -57,4 +57,10 @@ public class Knight extends Figure{
 
         return false;
     }
+    public String getFigure(){
+        if(isSelected()){
+            return "K";
+        }
+        return "k";
+    }
 }
