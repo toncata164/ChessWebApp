@@ -3,6 +3,9 @@ package edu.school.chess.logic;
 import java.util.List;
 
 public class Queen extends Figure{
+    public Queen(int row, int column, boolean figureColor){
+        this(figureColor, false, row, column);
+    }
     public Queen(boolean color, boolean selected, int row, int column) {
         super(color, selected, row, column);
     }

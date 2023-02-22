@@ -3,6 +3,11 @@ package edu.school.chess.logic;
 import java.util.List;
 
 public class  King extends Figure{
+
+    public King(boolean color, boolean selected, int row, int column) {
+        super(color, selected, row, column);
+    }
+
     @Override
     protected boolean canMove(int row, int column, List<Figure> figureList) {
         if(

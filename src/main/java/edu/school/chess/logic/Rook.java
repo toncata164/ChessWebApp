@@ -4,6 +4,9 @@ import java.util.List;
 
 public class Rook extends Figure{
 
+    public Rook(int row, int column, boolean figureColor){
+        this(row, column, figureColor, false);
+    }
     public Rook(int row, int column,boolean figureColor, boolean selected){
         super(figureColor, selected,row,column);
     }
