@@ -55,7 +55,7 @@ public class ChessEndpoint {
     }
     @OnError
     public void onError(Session session, Throwable throwable){
-
+        throwable.printStackTrace();
     }
 
     @OnClose

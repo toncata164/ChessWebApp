@@ -16,7 +16,7 @@ public class Game implements IGame{
                 new Bishop(7, 5, false),
                 new Knight(7, 6, false),
                 new Rook(7, 7, false),
-                new Pawn(6, 0, false),
+                //new Pawn(6, 0, false),
                 new Pawn(6, 1, false),
                 new Pawn(6, 2, false),
                 new Pawn(6, 3, false),
