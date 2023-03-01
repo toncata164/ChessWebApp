@@ -15,9 +15,10 @@ public class Rook extends Figure{
     protected boolean canMove(int row, int column, List<Figure> figureList) {
        Figure table[][] = TableGenerator.generateTable(figureList);
 
-       if(table[getRow()][getColumn()].getColor() == table[row][column].getColor()){
+       if(table[getRow()][getColumn()] != null && table[row][column] != null
+               && table[getRow()][getColumn()].getColor() == table[row][column].getColor()){
            return false;
-       }else if((getRow() != row && getColumn() != column) && (getRow() == row && getColumn() == row)){
+       }else if((getRow() != row && getColumn() != column) || (getRow() == row && getColumn() == row)){
            return false;
        }
        return true;
