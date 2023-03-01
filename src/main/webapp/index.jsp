@@ -3,6 +3,7 @@
         <link rel="stylesheet" href="styles/style.css">
         <script type="text/javascript">
             var socket;
+            var hasSelected = false;
             function connect(){
                 socket = new WebSocket("ws://localhost:8080/ChessWebApp/chess");
                 socket.onmessage = onMessage;
@@ -10,15 +11,93 @@
             function onMessage(event){
                 let obj = JSON.parse(event.data);
                 console.log(obj);
+                clearTable();
                 for(let i = 0; i<obj.length; i++){
                     let divID = "field"+obj[i].row+obj[i].column;
-                    document.getElementById(divID).innerHTML = obj[i].figure;
+                    let currentDiv = document.getElementById(divID);
+                    let inner = "<img src='figureImages/";
+                    if(obj[i].figure == "k" || obj[i].figure == "K"){
+                        if(obj[i].white){
+                            inner += "knight_white.png' />";
+                        }
+                        else if(obj[i].black){
+                            inner += "knight_black.png' />";
+                        }
+                    }
+                    else if(obj[i].figure == "r" || obj[i].figure == "R"){
+                         if(obj[i].white){
+                             inner += "rook_white.png' />";
+                         }
+                         else if(obj[i].black){
+                             inner += "rook_black.png' />";
+                         }
+                     }
+                    else if(obj[i].figure == "b" || obj[i].figure == "B"){
+                         if(obj[i].white){
+                             inner += "bishop_white.png' />";
+                         }
+                         else if(obj[i].black){
+                             inner += "bishop_black.png' />";
+                         }
+                     }
+                    else if(obj[i].figure == "q" || obj[i].figure == "Q"){
+                          if(obj[i].white){
+                              inner += "queen_white.png' />";
+                          }
+                          else if(obj[i].black){
+                              inner += "queen_black.png' />";
+                          }
+                      }
+                    else if(obj[i].figure == "c" || obj[i].figure == "C"){
+                         if(obj[i].white){
+                             inner += "king_white.png' />";
+                         }
+                         else if(obj[i].black){
+                             inner += "king_black.png' />";
+                         }
+                    }
+                    else if(obj[i].figure == "p" || obj[i].figure == "P"){
+                         if(obj[i].white){
+                             inner += "pawn_white.png' />";
+                         }
+                         else if(obj[i].black){
+                             inner += "pawn_black.png' />";
+                         }
+                    }
+                    else{
+                        document.getElementById(divID).innerHTML = obj[i].figure;
+                    }
+                    currentDiv.innerHTML = inner;
+                }
+            }
+            function clearTable(){
+                for(let i = 0; i<8; i++){
+                    for(let k = 0; k<8; k++){
+                        let divID = "field"+i+k;
+                        document.getElementById(divID).innerHTML = "";
+                    }
                 }
             }
             function sendMessage(){
                 let txtMessage = document.getElementById("message");
                 let text = txtMessage.value;
                 socket.send(text);
+            }
+            function sendSelectMessage(row, column){
+                socket.send("select "+row+" "+column);
+            }
+            function sendMoveMessage(row,  column){
+                socket.send("move "+row+" "+column);
+            }
+            function clickField(row, column){
+                let divField = document.getElementById("field"+row+column);
+                if(hasSelected){
+                    sendMoveMessage(row, column);
+                    hasSelected = false;
+                    return;
+                }
+                sendSelectMessage(row, column);
+                hasSelected = true;
             }
             function initTable(){
                 let chessTable = document.getElementById("chessTable");
@@ -37,7 +116,7 @@
                         else{
                             divs += "black";
                         }
-                        divs += "'></div>";
+                        divs += "' onclick='clickField("+i+", "+j+");'></div>";
 
                     }
                 }

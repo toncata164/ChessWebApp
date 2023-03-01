@@ -36,22 +36,22 @@ public class Knight extends Figure{
         }
         else{
             if(canMove(row,column,figureList)==true){
-                for(int i=0; i<figureList.size(); i++){
+                /*for(int i=0; i<figureList.size(); i++){
                     if(figureList.get(i)!=this && figureList.get(i).getRow()==row && figureList.get(i).getColumn()==column){
                         if(figureList.get(i).getColor()==this.getColor()){
                             return false;
                         }
-                        else{
+                        else{*/
                             setRow(row);
                             setColumn(column);
-                            figureList.remove(i);
+                            //figureList.remove(i);
                             return true;
-                        }
+                       /* }
                     }
                 }
                 setRow(row);
                 setColumn(column);
-                return true;
+                return true;*/
             }
         }
 
