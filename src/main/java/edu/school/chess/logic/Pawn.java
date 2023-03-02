@@ -9,25 +9,13 @@ public class Pawn extends Figure{
         super(color, selected, row, column);
     }
 
-    @Override
-    public boolean move(int row, int column, List<Figure> figureList) {
-        int curRow=this.getRow();
-        int curCol=this.getColumn();
-        if(curCol==column && curRow-1==row){
-            return true;
-        }
-        if(hasMovedBefore==false){
-            if(curCol==column && curRow-2==row){
-                hasMovedBefore=true;
-                return true;
-            }
-        }
-        return false;
+    public Pawn(int row, int column, boolean color){
+        this(color, false, row, column);
     }
 
     @Override
-    protected boolean canMove(int row, int column, List<Figure> figureList) {
-        if(move(row,column, figureList)==true){
+    public boolean move(int row, int column, List<Figure> figureList) {
+        if(canMove(row,column, figureList)==true){
             setRow(row);
             setColumn(column);
             return true;
@@ -43,5 +31,28 @@ public class Pawn extends Figure{
             }
         }
         return false;
+    }
+
+    @Override
+    protected boolean canMove(int row, int column, List<Figure> figureList) {
+        int curRow=this.getRow();
+        int curCol=this.getColumn();
+        if(curCol==column && curRow-1==row){
+            return true;
+        }
+        if(hasMovedBefore==false){
+            if(curCol==column && curRow-2==row){
+                hasMovedBefore=true;
+                return true;
+            }
+        }
+        return false;
+
+    }
+    public String getFigure(){
+        if(isSelected()){
+            return "P";
+        }
+        return "p";
     }
 }

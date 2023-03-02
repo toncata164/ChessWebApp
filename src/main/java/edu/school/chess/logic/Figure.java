@@ -6,7 +6,11 @@ public abstract class Figure {
     public boolean figureColor;//true - black,  false - white
     public boolean selected;
     public int row;
+<<<<<<< HEAD
     public  int column;
+=======
+    public int column;
+>>>>>>> 775d5cddae34fe33a11e943e439aa4a5d4b54bbf
 
     public void setColor(boolean newColor){
         this.figureColor=newColor;
@@ -26,6 +30,16 @@ public abstract class Figure {
     public boolean isSelected(){
         return selected;
     }
+<<<<<<< HEAD
+=======
+
+    public String getFigure(){
+        if(isSelected()){
+            return "F";
+        }
+        return "f";
+    }
+>>>>>>> 775d5cddae34fe33a11e943e439aa4a5d4b54bbf
     public int getRow(){
         return row;
     }
