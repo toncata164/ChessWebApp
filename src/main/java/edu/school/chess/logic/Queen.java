@@ -13,7 +13,7 @@ public class Queen extends Figure
         super(color, selected, row, column);
     }
 
-    public boolean move(int row, int column, List < Figure > figureList) 
+    public boolean move(int row, int column, List <Figure> figureList) 
     {
         if (canMove(row, column, figureList)) 
         {
@@ -26,7 +26,7 @@ public class Queen extends Figure
         return false;
     }
     
-    protected boolean canMove(int nextRow, int nextColumn, List < Figure > figureList) 
+    protected boolean canMove(int nextRow, int nextColumn, List <Figure> figureList) 
     {
         Figure[][] figures = TableGenerator.generateTable(figureList);
         
@@ -50,6 +50,22 @@ public class Queen extends Figure
             return true;
         }
 
+        if(figures[nextRow][nextColumn].isWhite() && figures[getRow()][getColumn()].isWhite())
+        {
+            return false;
+        }
+        else if(figures[nextRow][nextColumn].isBlack() && figures[getRow()][getColumn()].isBlack())
+        {
+            return false;
+        }
+        else if((figures[nextRow][nextColumn].isBlack() && figures[getRow()][getColumn()].isWhite()) ||
+                (figures[nextRow][nextColumn].isWhite() && figures[getRow()][getColumn()].isBlack()))
+        {
+            figureList.remove(figures[nextRow][nextColumn]);
+
+            return true;
+        }
+
         return false;
     }
 
@@ -65,16 +81,6 @@ public class Queen extends Figure
             {
                 return false;
             }
-        }
-
-        if(board[targetRow][targetCol].isWhite() && board[targetRow][targetCol].getColor()) //myColor is White
-        {
-            return false;
-        }
-
-        if(board[targetRow][targetCol].isBlack() && board[targetRow][targetCol].getColor()) //myColor is White
-        {
-            return false;
         }
 
         return true;
@@ -93,17 +99,7 @@ public class Queen extends Figure
                 return false;
             }
         }
-
-        if(board[targetRow][targetCol].isWhite() && board[targetRow][targetCol].getColor()) //myColor is White
-        {
-            return false;
-        }
-
-        if(board[targetRow][targetCol].isBlack() && board[targetRow][targetCol].getColor()) //myColor is White
-        {
-            return false;
-        }
-
+        
         return true;
     }
 
