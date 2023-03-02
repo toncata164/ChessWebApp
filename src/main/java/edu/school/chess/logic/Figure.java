@@ -56,6 +56,10 @@ public abstract class Figure
         }
     }
 
+    public String getFigure(){
+        return toString();
+    }
+
     protected abstract boolean canMove(int row, int column, List<Figure> figureList);
     public abstract boolean move(int row, int column, List<Figure> figureList);
 }

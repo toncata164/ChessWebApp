@@ -114,4 +114,16 @@ public class Queen extends Figure
             return "q";
         }
     }
+
+    public String getFigure()
+    {
+        if(isSelected())
+        {
+            return "Q";
+        }
+        else
+        {
+            return "q";
+        }
+    }
 }

@@ -20,7 +20,7 @@ public class Game implements IGame{
                 //new Pawn(6, 0, false),
                 new Pawn(6, 1, false),
                 new Pawn(6, 2, false),
-                new Pawn(6, 3, false),
+                //new Pawn(6, 3, false),
                 new Pawn(6, 4, false),
                 new Pawn(6, 5, false),
                 new Pawn(6, 6, false),
