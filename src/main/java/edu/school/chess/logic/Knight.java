@@ -33,7 +33,7 @@ public class Knight extends Figure{
     @Override
 
     public boolean move(int row, int column, List<Figure> figureList) {
-
+        Figure table[][] = TableGenerator.generateTable(figureList);
         if(isSelected() == false)
         {
             return false;
@@ -46,6 +46,7 @@ public class Knight extends Figure{
                             return false;
                         }
                         else{*/
+                        figureList.remove(table[row][column]);
                             setRow(row);
                             setColumn(column);
                             //figureList.remove(i);

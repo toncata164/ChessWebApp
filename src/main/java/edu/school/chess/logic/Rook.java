@@ -32,6 +32,7 @@ public class Rook extends Figure{
             if (canMove(row, column, figureList) == false) {
                 return false;
             } else {
+                figureList.remove(table[row][column]);
                 setRow(row);
                 setColumn(column);
                 return true;
