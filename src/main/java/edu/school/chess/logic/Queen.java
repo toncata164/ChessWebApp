@@ -23,6 +23,8 @@ public class Queen extends Figure
             return true;
         }
 
+        selected = false;
+
         return false;
     }
     

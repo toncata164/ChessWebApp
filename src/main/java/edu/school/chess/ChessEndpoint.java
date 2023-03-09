@@ -60,6 +60,6 @@ public class ChessEndpoint {
 
     @OnClose
     public void onClose(Session session, CloseReason reason){
-
+        System.out.println("close");
     }
 }

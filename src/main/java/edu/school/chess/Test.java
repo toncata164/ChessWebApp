@@ -7,8 +7,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Objects;
-
 
 public class Test {
 
@@ -16,9 +14,7 @@ public class Test {
     private static int clickedX=0;
     private static int clickedY=0;
 
-
     private static Knight king=new Knight(false, true, 3,3);
-
 
     private static java.util.List<Figure> figureList=new ArrayList<Figure>();
     private static boolean oldColor=true;
