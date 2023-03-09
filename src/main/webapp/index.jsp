@@ -15,6 +15,12 @@
                 for(let i = 0; i<obj.length; i++){
                     let divID = "field"+obj[i].row+obj[i].column;
                     let currentDiv = document.getElementById(divID);
+                    if(obj[i].selected == true){
+                        currentDiv.style.border = "2px solid green";
+                    }
+                    else{
+                        currentDiv.style.border = "none";
+                    }
                     let inner = "<img src='figureImages/";
                     if(obj[i].figure == "k" || obj[i].figure == "K"){
                         if(obj[i].white){

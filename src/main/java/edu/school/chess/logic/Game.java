@@ -46,6 +46,7 @@ public class Game implements IGame{
 
     @Override
     public void select(int row, int column) {
+        figures.stream().forEach(figure ->figure.setSelected(false));
         Optional<Figure> figure = figures.stream().
                 filter(f->f.getRow() == row && f.getColumn() == column).
                 findAny();
