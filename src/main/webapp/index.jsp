@@ -105,22 +105,25 @@
                 sendSelectMessage(row, column);
                 hasSelected = true;
             }
-            function clickField(row, column){
-                let divField = document.getElementById("field"+row+column);
-                if(hasSelected){
+            function clickField(row, column) {
+                let divField = document.getElementById("field" + row + column);
+                if (hasSelected) {
                     sendMoveMessage(row, column);
                     hasSelected = false;
+                    selectedField.style.borderColor = "";
+                    selectedField = null;
                     return;
                 }
-                sendSelectMessage(row, column);
-                hasSelected = true;
                 
-                let inner = divField.innerHTML;
-                if(inner != ""){
-                    divField.innerHTML = "<div class='circle'></div>" + inner;
+                let figureDiv = divField.firstChild;
+                if (figureDiv) {
+                    if (selectedField) {
+                        selectedField.style.borderColor = "";
+                    }
+                    divField.style.borderColor = "red";
+                    selectedField = divField;
+                    sendSelectMessage(row, column);
                     hasSelected = true;
-                    selectedRow = row;
-                    selectedColumn = column;
                 }
             }
             function initTable(){
