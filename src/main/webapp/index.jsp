@@ -99,6 +99,24 @@
                 sendSelectMessage(row, column);
                 hasSelected = true;
             }
+            function clickField(row, column){
+                let divField = document.getElementById("field"+row+column);
+                if(hasSelected){
+                    sendMoveMessage(row, column);
+                    hasSelected = false;
+                    return;
+                }
+                sendSelectMessage(row, column);
+                hasSelected = true;
+                
+                let inner = divField.innerHTML;
+                if(inner != ""){
+                    divField.innerHTML = "<div class='circle'></div>" + inner;
+                    hasSelected = true;
+                    selectedRow = row;
+                    selectedColumn = column;
+                }
+            }
             function initTable(){
                 let chessTable = document.getElementById("chessTable");
                 console.log(chessTable);
