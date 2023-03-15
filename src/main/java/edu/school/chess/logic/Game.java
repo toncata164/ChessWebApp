@@ -46,12 +46,15 @@ public class Game implements IGame{
 
     @Override
     public void select(int row, int column) {
-        figures.stream().forEach(figure ->figure.setSelected(false));
+        //figures.stream().forEach(figure ->figure.setSelected(false));
         Optional<Figure> figure = figures.stream().
                 filter(f->f.getRow() == row && f.getColumn() == column).
                 findAny();
         if(figure.isPresent()){
-            figure.get().setSelected(true);
+            figure.get().setSelected(!figure.get().isSelected());
+        }
+        else{
+            throw new RuntimeException("There is no figure to select!");
         }
     }
 
@@ -61,7 +64,14 @@ public class Game implements IGame{
                 filter(f->f.isSelected()).
                 findAny();
         if(figure.isPresent()){
-            figure.get().setSelected(!figure.get().move(row, column, figures));
+            boolean hasMoved = figure.get().move(row, column, figures);
+            figure.get().setSelected(!hasMoved);
+            if(!hasMoved){
+                throw new RuntimeException("Invalid move!");
+            }
+        }
+        else{
+            throw new RuntimeException("There is no selected figure!");
         }
     }
 
