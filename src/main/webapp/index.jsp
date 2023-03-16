@@ -16,7 +16,7 @@
                     let divID = "field"+obj[i].row+obj[i].column;
                     let currentDiv = document.getElementById(divID);
                     if(obj[i].selected == true){
-                        currentDiv.style.border = "2px solid green";
+                        currentDiv.style.border = "5px solid red";
                     }
                     else{
                         currentDiv.style.border = "none";
@@ -108,22 +108,18 @@
 
             function clickField(row, column){
                 let divField = document.getElementById("field"+row+column);
+                                    divField.style.border = "10px solid blue";
                 if(hasSelected){
                     sendMoveMessage(row, column);
                     hasSelected = false;
+
                     return;
                 }
 
                 sendSelectMessage(row, column);
                 hasSelected = true;
+                divField.style.border = "none";
 
-                let inner = divField.innerHTML;
-                if(inner != ""){
-                    divField.innerHTML = "<div class='circle'></div>" + inner;
-                    hasSelected = true;
-                    selectedRow = row;
-                    selectedColumn = column;
-                }   
             }
 
             function initTable(){
