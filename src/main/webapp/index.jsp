@@ -111,12 +111,9 @@
                 if(hasSelected){
                     sendMoveMessage(row, column);
                     hasSelected = false;
-                    let circle = divField.querySelector('.circle');
-                    if (circle) {
-                        divField.removeChild(circle);
-                    }
                     return;
                 }
+
                 let inner = divField.innerHTML;
                 if(inner != ""){
                     divField.innerHTML = "<div class='circle'></div>" + inner;
@@ -124,6 +121,9 @@
                     selectedRow = row;
                     selectedColumn = column;
                 }
+
+                //sendSelectMessage(row, column);
+                //hasSelected = true;
             }
 
             function initTable(){
