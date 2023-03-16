@@ -108,16 +108,16 @@
                     return;
                 }
 
+                sendSelectMessage(row, column);
+                hasSelected = true;
+
                 let inner = divField.innerHTML;
                 if(inner != ""){
                     divField.innerHTML = "<div class='circle'></div>" + inner;
                     hasSelected = true;
                     selectedRow = row;
                     selectedColumn = column;
-                }
-
-                //sendSelectMessage(row, column);
-                //hasSelected = true;
+                }   
             }
 
             function initTable(){
