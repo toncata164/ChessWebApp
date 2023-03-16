@@ -15,10 +15,14 @@
                 for(let i = 0; i<obj.length; i++){
                     let divID = "field"+obj[i].row+obj[i].column;
                     let currentDiv = document.getElementById(divID);
-                    if(obj[i].selected == true){
+                    if(obj[i].selected){
+                        currentDiv.top -= 5;
+                        currentDiv.left -= 5;
                         currentDiv.style.border = "5px solid red";
                     }
                     else{
+                        currentDiv.top += 5;
+                        currentDiv.left += 5;
                         currentDiv.style.border = "none";
                     }
                     let inner = "<img src='figureImages/";
@@ -81,6 +85,7 @@
                     for(let k = 0; k<8; k++){
                         let divID = "field"+i+k;
                         document.getElementById(divID).innerHTML = "";
+                        document.getElementById(divID).border = null;
                     }
                 }
             }
@@ -104,22 +109,6 @@
                 }
                 sendSelectMessage(row, column);
                 hasSelected = true;
-            }
-
-            function clickField(row, column){
-                let divField = document.getElementById("field"+row+column);
-                                    divField.style.border = "10px solid blue";
-                if(hasSelected){
-                    sendMoveMessage(row, column);
-                    hasSelected = false;
-
-                    return;
-                }
-
-                sendSelectMessage(row, column);
-                hasSelected = true;
-                divField.style.border = "none";
-
             }
 
             function initTable(){
